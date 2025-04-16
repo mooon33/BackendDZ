@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="filters">
+    <form method="get" class="filter-form">
+        <!-- Поиск -->
+        <div class="form-group">
+            <input type="text" name="search" placeholder="Поиск товаров..."
+                   value="{{ request.GET.search }}">
+            <button type="submit" class="btn btn-search">Найти</button>
+        </div>
+
+        <!-- Фильтр по категориям -->
+        <div class="form-group">
+            <select name="category" onchange="this.form.submit()">
+                <option value="">Все категории</option>
+                {% for category in categories %}
+                <option value="{{ category.id }}"
+                        {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Фильтр по цене -->
+        <div class="form-group price-filter">
+            <input type="number" name="min_price" placeholder="От"
+                   value="{{ request.GET.min_price }}">
+            <span>-</span>
+            <input type="number" name="max_price" placeholder="До"
+                   value="{{ request.GET.max_price }}">
+            <button type="submit" class="btn btn-filter">Фильтр</button>
+        </div>
+    </form>
+</div>
+
+<div class="products">
+    {% for product in products %}
+    <div class="product-card">
+        <!-- Отображение товара -->
+    </div>
+    {% empty %}
+    <p>Товары не найдены.</p>
+    {% endfor %}
+</div>
+{% endblock %}
