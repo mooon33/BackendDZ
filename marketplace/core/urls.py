@@ -3,6 +3,8 @@ from django.urls import path, include
 
 from . import views
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LogoutView
+from .views import custom_logout
 from .forms import CustomLoginForm
 
 
@@ -21,11 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('register/', views.register, name='register'),
-    path('login/', LoginView.as_view(
-        template_name='core/login.html',
-        authentication_form=CustomLoginForm
-    ), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('login/', LoginView.as_view(template_name='core/login.html',authentication_form=CustomLoginForm), name='login'),
+    path('logout/', custom_logout, name='logout'),
     path('products/', ProductListView.as_view(), name='product-list'),
     path('products/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
     path('profile/', ProfileView.as_view(), name='profile'),

@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-4">
+                <h3 class="mb-4 text-center text-primary">
+                    <i class="bi bi-person-circle me-2"></i>Мой профиль
+                </h3>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong>Имя пользователя:</strong> <span>{{ user.username }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong>Email:</strong> <span>{{ user.email }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong>Дата регистрации:</strong> <span>{{ user.date_joined|date:"d.m.Y H:i" }}</span>
+                    </li>
+                </ul>
+
+                <div class="text-end mt-4">
+                    <!-- Исправленная кнопка выхода (POST-запрос) -->
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger">
+                            <i class="bi bi-box-arrow-right me-1"></i> Выйти
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

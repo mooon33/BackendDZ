@@ -7,6 +7,8 @@ from django.views.generic import TemplateView
 from .forms import RegisterForm
 from .models import Product, Category
 from django.contrib import messages
+from django.contrib.auth import logout
+from django.views.decorators.http import require_POST
 
 
 def register(request):
@@ -20,6 +22,11 @@ def register(request):
         form = RegisterForm()
     return render(request, 'core/register.html', {'form': form})
 
+
+@require_POST  # Разрешаем только POST-запросы
+def custom_logout(request):
+    logout(request)  # Выход из аккаунта
+    return render(request, 'core/logout.html') 
 
 
 
