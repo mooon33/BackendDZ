@@ -140,13 +140,28 @@
         </nav>
     </header>
 
-    <main class="container my-4">
+    <main class="container my-4 position-relative">
+        <img src="{% static 'media/wallpaper.jpg' %}" 
+         alt="Фон" 
+         class="position-absolute top-0 start-0 w-100 h-auto object-fit-cover"
+         style="z-index: -1;">
         {% if messages %}
         <div class="row">
             <div class="col-12">
                 {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                    {{ message }}
+                    <div class="d-flex align-items-center">
+                        {% if message.tags == 'success' %}
+                        <img src="{% static 'icons/success-icon.png' %}" alt="Success" class="me-2" style="height: 24px;">
+                        {% elif message.tags == 'error' or message.tags == 'danger' %}
+                        <img src="{% static 'icons/error-icon.png' %}" alt="Error" class="me-2" style="height: 24px;">
+                        {% elif message.tags == 'warning' %}
+                        <img src="{% static 'icons/warning-icon.png' %}" alt="Warning" class="me-2" style="height: 24px;">
+                        {% elif message.tags == 'info' %}
+                        <img src="{% static 'icons/info-icon.png' %}" alt="Info" class="me-2" style="height: 24px;">
+                        {% endif %}
+                        <div>{{ message }}</div>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 {% endfor %}
