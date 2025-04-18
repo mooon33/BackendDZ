@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from .forms import RegisterForm
 from .models import Product, Category
+from django.contrib import messages
 
 
 def register(request):
@@ -13,6 +14,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Регистрация прошла успешно!')
             return redirect('login')
     else:
         form = RegisterForm()

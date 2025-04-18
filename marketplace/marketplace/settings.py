@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'core.apps.CoreConfig',
     'cart',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
