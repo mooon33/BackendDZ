@@ -1,47 +1,135 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-<div class="filters">
-    <form method="get" class="filter-form">
-        <!-- Поиск -->
-        <div class="form-group">
-            <input type="text" name="search" placeholder="Поиск товаров..."
-                   value="{{ request.GET.search }}">
-            <button type="submit" class="btn btn-search">Найти</button>
-        </div>
+<div class="container mt-4">
+    <!-- Фильтры -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <!-- Поиск -->
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" 
+                               placeholder="Поиск товаров..." value="{{ request.GET.search }}">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-search"></i> Найти
+                        </button>
+                    </div>
+                </div>
 
-        <!-- Фильтр по категориям -->
-        <div class="form-group">
-            <select name="category" onchange="this.form.submit()">
-                <option value="">Все категории</option>
-                {% for category in categories %}
-                <option value="{{ category.id }}"
-                        {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>
-                    {{ category.name }}
-                </option>
-                {% endfor %}
-            </select>
-        </div>
+                <!-- Фильтр по категориям -->
+                <div class="col-md-3">
+                    <select name="category" class="form-select" onchange="this.form.submit()">
+                        <option value="">Все категории</option>
+                        {% for category in categories %}
+                        <option value="{{ category.id }}"
+                                {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-        <!-- Фильтр по цене -->
-        <div class="form-group price-filter">
-            <input type="number" name="min_price" placeholder="От"
-                   value="{{ request.GET.min_price }}">
-            <span>-</span>
-            <input type="number" name="max_price" placeholder="До"
-                   value="{{ request.GET.max_price }}">
-            <button type="submit" class="btn btn-filter">Фильтр</button>
+                <!-- Фильтр по цене -->
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <input type="number" name="min_price" class="form-control" 
+                               placeholder="От" value="{{ request.GET.min_price }}">
+                        <span class="input-group-text">-</span>
+                        <input type="number" name="max_price" class="form-control" 
+                               placeholder="До" value="{{ request.GET.max_price }}">
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="bi bi-funnel"></i> Фильтр
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
-</div>
-
-<div class="products">
-    {% for product in products %}
-    <div class="product-card">
-        <!-- Отображение товара -->
     </div>
-    {% empty %}
-    <p>Товары не найдены.</p>
-    {% endfor %}
+
+    <!-- Список товаров -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card h-100 product-card shadow-sm">
+                <!-- Изображение товара -->
+                <img src="{{ product.image.url }}" class="card-img-top p-3" alt="{{ product.name }}" 
+                     style="height: 200px; object-fit: contain; background: #f8f9fa;">
+                
+                <div class="card-body">
+                    <!-- Название и цена -->
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span class="text-muted">{{ product.category.name }}</span>
+                        <span class="fw-bold text-primary">{{ product.price }} ₽</span>
+                    </div>
+                    
+                    <!-- Описание -->
+                    <p class="card-text text-muted small">{{ product.description|truncatechars:100 }}</p>
+                </div>
+                
+                <!-- Кнопки действий -->
+                <div class="card-footer bg-transparent">
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'product-detail' product.id %}" class="btn btn-outline-primary">
+                            <i class="bi bi-eye"></i> Подробнее
+                        </a>
+                        <button class="btn btn-primary add-to-cart" data-product-id="{{ product.id }}">
+                            <i class="bi bi-cart-plus"></i> В корзину
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                <i class="bi bi-exclamation-circle fs-4"></i>
+                <h4 class="mt-2">Товары не найдены</h4>
+                <p>Попробуйте изменить параметры поиска</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
+
+<style>
+    .product-card {
+        transition: all 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+        border: none;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .card-img-top {
+        transition: all 0.3s ease;
+    }
+    
+    .product-card:hover .card-img-top {
+        transform: scale(1.03);
+    }
+    
+    .price-filter .form-control {
+        max-width: 100px;
+    }
+    
+    .card-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    @media (max-width: 768px) {
+        .filters .col-md-4, 
+        .filters .col-md-3, 
+        .filters .col-md-5 {
+            margin-bottom: 15px;
+        }
+    }
+</style>
 {% endblock %}
