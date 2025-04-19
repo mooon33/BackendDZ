@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5f7ef25-ee8a-4960-9ce5-c51253fa69af" name="Changes" comment="" />
+    <list default="true" id="e5f7ef25-ee8a-4960-9ce5-c51253fa69af" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/marketplace/cart/cart_detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marketplace/cart/context_processors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marketplace/cart/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/marketplace/core/templates/core/product_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/cart/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/cart/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/cart/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/cart/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/marketplace/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/marketplace/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/marketplace/marketplace/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/marketplace/marketplace/urls.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +24,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
