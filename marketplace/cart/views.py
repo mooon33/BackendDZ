@@ -41,7 +41,7 @@ def add_to_cart(request, product_id):
 @login_required
 def remove_from_cart(request, item_id):
     cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
-    product_name = cart_item.product.name
+    product_name = cart_item.product.title
     cart_item.delete()
     messages.success(request, f"{product_name} удален из корзины")
     return redirect('cart:detail')
