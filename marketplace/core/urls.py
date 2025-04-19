@@ -29,5 +29,7 @@ urlpatterns = [
     path('products/<int:pk>/', ProductDetailView.as_view(), name='product-detail'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('products/', ProductListView.as_view(), name='product-list'),
+    path('admin/', admin.site.urls),
+    path('cart/', include('cart.urls')), 
     path('', views.home, name='home'),
 ]

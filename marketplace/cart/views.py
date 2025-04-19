@@ -7,7 +7,14 @@ from .models import Cart, CartItem
 @login_required
 def cart_detail(request):
     cart, created = Cart.objects.get_or_create(user=request.user)
-    return render(request, 'cart/cart_detail.html', {'cart': cart})
+    cart_items = cart.items.select_related('product')
+    cart_total = sum(item.total_price for item in cart_items)
+
+    return render(request, 'cart/cart_detail.html', {
+        'cart': cart,
+        'cart_items': cart_items,
+        'cart_total': cart_total
+    })
 
 
 @login_required
