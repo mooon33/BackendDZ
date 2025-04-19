@@ -5,12 +5,5 @@
 
 {% block content %}
 <h1>Добро пожаловать в наш маркетплейс!</h1>
-<div class="products">
-    {% for product in products %}
-    <div class="product">
-        <h2>{{ product.title }}</h2>
-        <p>Цена: {{ product.price }}</p>
-    </div>
-    {% endfor %}
-</div>
+
 {% endblock %}
