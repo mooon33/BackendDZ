@@ -61,3 +61,16 @@ def update_quantity(request, item_id):
         messages.success(request, "Товар удален из корзины")
 
     return redirect('cart:detail')
+
+@login_required
+def checkout(request):
+    # Получаем корзину пользователя
+    cart = get_object_or_404(Cart, user=request.user)
+
+    # Очищаем корзину
+    cart.items.all().delete()  # Используем 'items' вместо 'cartitem_set'
+
+    # Добавляем сообщение об успешной покупке
+    messages.success(request, "Спасибо за покупку!")
+
+    return redirect('cart:detail')

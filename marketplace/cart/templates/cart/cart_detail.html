@@ -40,9 +40,12 @@
 
     <div class="text-end mt-3">
         <h5>Общая сумма: {{ cart_total }} ₽</h5>
-        {# <a href="{% url 'checkout' %}" class="btn btn-success">Оформить заказ</a> #}
-        <i class="bi bi-credit-card"></i> Оформить заказ
-        </a>
+        <form method="post" action="{% url 'cart:checkout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-credit-card"></i> Оформить заказ
+            </button>
+        </form>
     </div>
     {% else %}
     <div class="alert alert-info">
