@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from core.models import Product
+from core.models import Product  # Простой импорт
 from .models import Cart, CartItem
-
 
 @login_required
 def cart_detail(request):
